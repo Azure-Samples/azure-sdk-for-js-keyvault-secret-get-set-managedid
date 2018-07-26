@@ -13,7 +13,7 @@ var server = http.createServer(function(request, response) {
 msRestAzure.loginWithAppServiceMSI({resource: 'https://vault.azure.net'}).then( (credentials) => {
     const keyVaultClient = new KeyVault.KeyVaultClient(credentials);
 
-    var vaultUri = "https://" + "PrashanthNodeVault" + ".vault.azure.net/";
+    var vaultUri = "https://" + "<YourVaultName>" + ".vault.azure.net/";
     
     // We're setting the Secret value here and retrieving the secret value
     keyVaultClient.setSecret(vaultUri, 'my-secret', 'test-secret-value', {})
@@ -30,7 +30,7 @@ msRestAzure.loginWithAppServiceMSI({resource: 'https://vault.azure.net'}).then( 
         });
 
     // Below code demonstrates how to retrieve a secret value
-    // var vaultUri = "https://" + "<YourKeyVaultName>" + ".vault.azure.net/";
+    
     // keyVaultClient.getSecret(vaultUri, "AppSecret", "").then(function(response){
     //     console.log(response);    
     // })
