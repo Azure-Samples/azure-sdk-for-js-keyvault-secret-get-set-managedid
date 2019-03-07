@@ -18,7 +18,8 @@ msRestAzure.loginWithAppServiceMSI({resource: 'https://vault.azure.net'}).then( 
     keyVaultClient.setSecret(vaultUri, 'my-secret', 'test-secret-value', {})
         .then( (kvSecretBundle, httpReq, httpResponse) => {
             console.log("Secret id: '" + kvSecretBundle.id + "'.");
-            return keyVaultClient.getSecret(kvSecretBundle.id, {});
+            var secretId = KeyVault.parseSecretIdentifier(kvSecretBundle.id);
+            return keyVaultClient.getSecret(secretId.vault, secretId.name, secretId.version);
         })
         .then( (bundle) => {
             console.log("Successfully retrieved 'test-secret'");
