@@ -1,7 +1,7 @@
 
 # Quickstart: Set and retrieve a secret from Azure Key Vault using a Node Web App 
 
-This QuickStart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be  run locally or in Azure. The quickstart uses Node.js and Managed service identities (MSIs)
+This QuickStart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app will be run via an App Service in Azure. The quickstart uses Node.js and Managed service identities (MSIs)
 
 > * Create a Key Vault.
 > * Store a secret in Key Vault.
@@ -9,8 +9,9 @@ This QuickStart shows how to store a secret in Key Vault and how to retrieve it 
 > * Create an Azure Web Application.
 > * [Enable managed service identities](https://docs.microsoft.com/azure/active-directory/managed-service-identity/overview).
 > * Grant the required permissions for the web application to read data from Key vault.
+> * Deploy the Web Application to Azure
 
-Before you proceed make sure that you are familiar with the [basic concepts](key-vault-whatis.md#basic-concepts).
+Before you proceed make sure that you are familiar with the [basic concepts](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-whatis#basic-concepts).
 
 ## Prerequisites
 
@@ -29,7 +30,7 @@ az login
 
 ## Create resource group
 
-Create a resource group with the [az group create](/cli/azure/group#az-group-create) command. An Azure resource group is a logical container into which Azure resources are deployed and managed.
+Create a resource group with the [az group create](https://docs.microsoft.com/en-us/cli/azure/group#az-group-create) command. An Azure resource group is a logical container into which Azure resources are deployed and managed.
 
 Please select a Resource Group name and fill in the placeholder.
 The following example creates a resource group named *<YourResourceGroupName>* in the *eastus* location.
@@ -43,10 +44,10 @@ The resource group you just created is used throughout this tutorial.
 
 ## Create an Azure Key Vault
 
-Next you create a Key Vault using the resource group created in the previous step. Although “ContosoKeyVault” is used as the name for the Key Vault throughout this article, you have to use a unique name. Provide the following information:
+Next you create a Key Vault using the resource group created in the previous step. Your Key Vault must have a unique name. Provide the following information:
 
 * Vault name - **Select a Key Vault Name here**.
-* Resource group name - **Select a Resource Group Name here**.
+* Resource group name - **Use the same name as previous step for the Resource Group**.
 * The location - **East US**.
 
 ```azurecli
@@ -71,7 +72,7 @@ To view the value contained in the secret as plain text:
 az keyvault secret show --name "AppSecret" --vault-name "<YourKeyVaultName>"
 ```
 
-This command shows the secret information including the URI. After completing these steps, you should have a URI to a secret in an Azure Key Vault. Write this information down. You need it in a later step.
+This command shows the secret information including the URI. After completing these steps, you should have a URI to a secret in an Azure Key Vault.
 
 ## Clone the Repo
 
@@ -84,59 +85,55 @@ git clone https://github.com/Azure-Samples/key-vault-node-quickstart.git
 ## Install dependencies
 
 Here we install the dependencies. Run the following commands
-    cd key-vault-node-quickstart
-    npm install
-
-This project used 2 node modules:
-
+```
+cd key-vault-node-quickstart
+npm install
+```
+This project used 3 node modules:
 * [ms-rest-azure](https://www.npmjs.com/package/ms-rest-azure) 
 * [azure-keyvault](https://www.npmjs.com/package/azure-keyvault)
+* [nconf](https://www.npmjs.com/package/nconf)
 
-## Publish the web application to Azure
+## Set up the web application in Azure
 
-Below are the few steps we need to do
+- Create a [Azure App Service](https://azure.microsoft.com/services/app-service/) Plan. You can store multiple web apps in this plan.
 
-- The 1st step is to create a [Azure App Service](https://azure.microsoft.com/services/app-service/) Plan. You can store multiple web apps in this plan.
-
+    ```azurecli
+    az appservice plan create --name <YourAppServicePlanName> --resource-group <YourResourceGroupName>
     ```
-    az appservice plan create --name myAppServicePlan --resource-group myResourceGroup
+- Next we create a web app. In the following example, replace <YourAppName> with a globally unique app name (valid characters are a-z, 0-9, and -). The runtime is set to NODE|6.9. To see all supported runtimes, run az webapp list-runtimes
+    ```azurecli
+    az webapp create --resource-group <YourResourceGroupName> --plan <YourAppServicePlanName> --name <YourAppName> --runtime "NODE|6.9" --deployment-local-git
     ```
-- Next we create a web app. In the following example, replace <app_name> with a globally unique app name (valid characters are a-z, 0-9, and -). The runtime is set to NODE|6.9. To see all supported runtimes, run az webapp list-runtimes
+- After the web app has been created run:    
+    ```azurecli
+    az webapp deployment list-publishing-credentials --resource-group <YourResourceGroupName> --name <YourAppName>
     ```
-    # Bash
-    az webapp create --resource-group myResourceGroup --plan myAppServicePlan --name <app_name> --runtime "NODE|6.9" --deployment-local-git
-    # PowerShell
-    az --% webapp create --resource-group myResourceGroup --plan myAppServicePlan --name <app_name> --runtime "NODE|6.9"
-    ```
-    When the web app has been created, the Azure CLI shows output similar to the following example:
+    You should see output similar to the following example:
     ```
     {
-      "availabilityState": "Normal",
-      "clientAffinityEnabled": true,
-      "clientCertEnabled": false,
-      "cloningInfo": null,
-      "containerSize": 0,
-      "dailyMemoryTimeQuota": 0,
-      "defaultHostName": "<app_name>.azurewebsites.net",
-      "enabled": true,
-      "deploymentLocalGitUrl": "https://<username>@<app_name>.scm.azurewebsites.net/<app_name>.git"
-      < JSON data removed for brevity. >
+      ...
+      "name": "<YourAppName>",
+      "publishingPassword": "LongStringofRandomNumbersandLetters",
+      "publishingPasswordHash": null,
+      "publishingPasswordHashSalt": null,
+      "publishingUserName": "$<YourAppName>",
+      "resourceGroup": "<YourResourceGroupName>",
+      ...
     }
     ```
-    Browse to your newly created web app and you should see a functioning web app. Replace <app_name> with a unique app name.
-
+- Browse to your newly created web app and you should see a functioning web app. Replace <YourAppName> with a unique app name.
     ```
-    http://<app name>.azurewebsites.net
+    http://<YourAppName>.azurewebsites.net
     ```
-    The above command also creates a Git-enabled app which allows you to deploy to azure from your local git. 
-    Local git is configured with url of 'https://<username>@<app_name>.scm.azurewebsites.net/<app_name>.git'
-
-- Create a deployment user
-    After the previous command is completed you can add add an Azure remote to your local Git repository. Replace <url> with the URL of the Git remote that you got from Enable Git for your app.
-
+- Add a remote to your local git repository
+    The above commands creates a Git-enabled app which allows you to deploy to Azure from your local git repository. The username will be listed in property *publishingUserName* and the password you will need will be in the property *publishingPassword*.
+    
+    Add an Azure *remote* to your local Git repository. Replace `<username>`, `<password>`, and `<YourAppName>` with values from the above call to `az webapp deployment list-publishing-credentials`.  Note: If your `<userename>` value begins with `$`, be sure to surround the URL with single quotes as shown below.
     ```
-    git remote add azure <url>
+    git remote add azure 'https://<username>:<password>@<YourAppName>.scm.azurewebsites.net/<YourAppName>.git'
     ```
+    Note: you can omit the `:<password>` from the remote url definition and you will be prompted for the password the first time you publish to the remote repository.
 
 ## Enable Managed Service Identity
 
@@ -145,7 +142,7 @@ Azure Key Vault provides a way to securely store credentials and other keys and 
 Run the assign-identity command to create the identity for this application:
 
 ```azurecli
-az webapp identity assign --name <app_name> --resource-group "<YourResourceGroupName>"
+az webapp identity assign --name <YourAppName> --resource-group "<YourResourceGroupName>"
 ```
 
 This command is the equivalent of going to the portal and switching **Managed service identity** to **On** in the web application properties.
@@ -166,6 +163,22 @@ Then, run this command using the name of your Key Vault and the value of Princip
 az keyvault set-policy --name '<YourKeyVaultName>' --object-id <PrincipalId> --secret-permissions get
 ```
 
+## Edit the settings.json file to point to your Key Vault
+Edit the value for keyvaultname in the settings.json file to match what you used for `<YourKeyVaultName>` in previous commands.
+```
+{
+    "description_keyvaultname": "keyvault name should be in the next field, only include first part like 'nodekvdemo', NOT 'nodekvdemo.vault.azure.net'",
+    "keyvaultname": "this_keyvault_does_not_exist_edit_settings_json"
+}
+```
+
+After saving the changes to settings.json, run the following to add the changes to your local git repository:
+
+```
+git add settings.json
+git commit -m 'Update value of keyvaultname in settings.json'
+```
+
 ## Deploy the Node App to Azure and retrieve the secret value
 
 Now that everything is set. Run the following command to deploy the app to Azure
@@ -174,8 +187,7 @@ Now that everything is set. Run the following command to deploy the app to Azure
 git push azure master
 ```
 
-After this when you browse https://<app_name>.azurewebsites.net you can see the secret value.
-Make sure that you replaced the name <YourKeyVaultName> with your vault name
+After this when you browse to https://<YourAppName>.azurewebsites.net you should see the secret value.
 
 ## Next steps
 

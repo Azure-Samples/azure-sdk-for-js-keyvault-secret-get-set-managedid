@@ -1,0 +1,4 @@
+{
+    "description_keyvaultname": "key vault name should be in the next field, only include first part like 'keyvaultnode', NOT 'keyvaultnode.vault.azure.net'",
+    "keyvaultname": "this_key_vault_does_not_exist_edit_settings_json"
+}
