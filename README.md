@@ -1,3 +1,12 @@
+---
+page_type: sample
+languages:
+- javascript
+products:
+- azure
+description: "This QuickStart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be  run locally or in Azure."
+urlFragment: key-vault-node-quickstart
+---
 
 # Quickstart: Set and retrieve a secret from Azure Key Vault using a Node Web App 
 
