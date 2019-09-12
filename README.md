@@ -13,7 +13,7 @@ This QuickStart shows how to store a secret in Key Vault and how to retrieve it 
 Before you proceed make sure that you are familiar with the [basic concepts](key-vault-whatis.md#basic-concepts).
 
 # Folders introduction
-two folders are referred to different version of Azure SDK.
+Two folders are referred to different version of Azure SDK.
 * key-vault-node-quickstart-old referenced to following packages:
   * [ms-rest-azure](https://www.npmjs.com/package/ms-rest-azure)
   * [azure-keyvault](https://www.npmjs.com/package/azure-keyvault)
