@@ -85,7 +85,7 @@ git clone https://github.com/Azure-Samples/key-vault-node-quickstart.git
 
 Here we install the dependencies. Run the following commands
 ```
-cd key-vault-node-quickstart
+cd key-vault-node-quickstart-v4
 ```    
 ```
 npm install
