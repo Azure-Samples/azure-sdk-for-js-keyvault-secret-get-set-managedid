@@ -14,10 +14,10 @@ Before you proceed make sure that you are familiar with the [basic concepts](key
 
 # Folders introduction
 Two folders are referred to different version of Azure SDK.
-* key-vault-node-quickstart-old referenced to following packages:
+* key-vault-node-quickstart-v3 referenced to following packages:
   * [ms-rest-azure](https://www.npmjs.com/package/ms-rest-azure)
   * [azure-keyvault](https://www.npmjs.com/package/azure-keyvault)
-* key-vault-node-quickstart-new referenced to following packages:
+* key-vault-node-quickstart-v4 referenced to following packages:
   * [@azure/identity](https://www.npmjs.com/package/@azure/identity)
   * [@azure/keyvault-secrets](https://www.npmjs.com/package/@azure/keyvault-secrets)
   
