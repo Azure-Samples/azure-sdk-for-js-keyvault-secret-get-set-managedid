@@ -10,7 +10,7 @@ This QuickStart shows how to store a secret in Key Vault and how to retrieve it 
 > * [Enable managed service identities](https://docs.microsoft.com/azure/active-directory/managed-service-identity/overview).
 > * Grant the required permissions for the web application to read data from Key vault.
 
-Before you proceed make sure that you are familiar with the [basic concepts](key-vault-whatis.md#basic-concepts).
+Before you proceed make sure that you are familiar with the [basic concepts](https://docs.microsoft.com/en-us/azure/key-vault/basic-concepts).
 
 # Folders introduction
 Two folders are referred to different version of Azure SDK.

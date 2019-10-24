@@ -10,7 +10,7 @@ This QuickStart shows how to store a secret in Key Vault and how to retrieve it 
 > * [Enable managed service identities](https://docs.microsoft.com/azure/active-directory/managed-service-identity/overview).
 > * Grant the required permissions for the web application to read data from Key vault.
 
-Before you proceed make sure that you are familiar with the [basic concepts](key-vault-whatis.md#basic-concepts).
+Before you proceed make sure that you are familiar with the [basic concepts](https://docs.microsoft.com/en-us/azure/key-vault/basic-concepts).
 
 ## Prerequisites
 
@@ -29,7 +29,7 @@ az login
 
 ## Create resource group
 
-Create a resource group with the [az group create](/cli/azure/group#az-group-create) command. An Azure resource group is a logical container into which Azure resources are deployed and managed.
+Create a resource group with the [az group create](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-template-deploy-cli) command. An Azure resource group is a logical container into which Azure resources are deployed and managed.
 
 Please select a Resource Group name and fill in the placeholder.
 The following example creates a resource group named *<YourResourceGroupName>* in the *eastus* location.
@@ -112,7 +112,7 @@ Below are the few steps we need to do
     # PowerShell
     az --% webapp create --resource-group myResourceGroup --plan myAppServicePlan --name <app_name> --runtime "NODE|6.9"
     ```
-    When the web app has been created, the Azure CLI shows output similar to the following example:
+   After the web app is created, Azure CLI outputs something similar to the following:
     ```
     {
       "availabilityState": "Normal",
@@ -127,16 +127,17 @@ Below are the few steps we need to do
       < JSON data removed for brevity. >
     }
     ```
-    Browse to your newly created web app and you should see a functioning web app. Replace <app_name> with a unique app name.
+    Browse to your newly created web app, and you should see a functioning web app. Replace <app_name> with the unique app name that you chose previously.
 
     ```
     http://<app name>.azurewebsites.net
     ```
-    The above command also creates a Git-enabled app which allows you to deploy to azure from your local git. 
-    Local git is configured with url of 'https://<username>@<app_name>.scm.azurewebsites.net/<app_name>.git'
+    The above command also creates a Git-enabled app which allows you to deploy to Azure from your local Git repository. 
+    Local Git repository is configured with this url: 'https://<username>@<app_name>.scm.azurewebsites.net/<app_name>.git'
 
 - Create a deployment user
-    After the previous command is completed you can add add an Azure remote to your local Git repository. Replace <url> with the URL of the Git remote that you got from Enable Git for your app.
+
+    After running the previous command, you can add an Azure Remote to your local Git repository. Replace <url> with the URL of the Git Remote that you got from enabling Git for your app.
 
     ```
     git remote add azure <url>
@@ -172,14 +173,14 @@ az keyvault set-policy --name '<YourKeyVaultName>' --object-id <PrincipalId> --s
 
 ## Deploy the Node App to Azure and retrieve the secret value
 
-Now that everything is set. Run the following command to deploy the app to Azure
+Now that everything is set, run the following command to deploy the app to Azure
 
 ```
 git push azure master
 ```
 
-After this when you browse https://<app_name>.azurewebsites.net you can see the secret value.
-Make sure that you replaced the name <YourKeyVaultName> with your vault name
+Now if you go on https://<app_name>.azurewebsites.net, you can see the secret value.
+
 
 ## Next steps
 
