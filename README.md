@@ -247,15 +247,15 @@ Make sure that you replaced the name <AppName> with your vault name.
 
 # Azure SDK versions
 
-You will find the following folders: key-vault-node-quickstart-3, which references the version 3.0 SDK and keyvault-node-quickstart-v4, which uses the version 4.0 SDK.
+You will find the following folders: key-vault-node-quickstart-v3, which references the version 3.0 SDK and keyvault-node-quickstart-v4, which uses the version 4.0 SDK.
 
-* key-vault-node-quickstart-v3 referenced to following packages:
-  * [ms-rest-azure](https://www.npmjs.com/package/ms-rest-azure)
-  * [azure-keyvault](https://www.npmjs.com/package/azure-keyvault)
-* key-vault-node-quickstart-v4 referenced to following packages:
+* To use the latest Azure SDK version [key-vault-node-quickstart-v4] please add the following dependency:
   * [@azure/identity](https://www.npmjs.com/package/@azure/identity)
   * [@azure/keyvault-secrets](https://www.npmjs.com/package/@azure/keyvault-secrets)
-  
+* For the previous stable Azure SDK version [key-vault-node-quickstart-v3] please add the following dependency:
+  * [ms-rest-azure](https://www.npmjs.com/package/ms-rest-azure)
+  * [azure-keyvault](https://www.npmjs.com/package/azure-keyvault)
+
 ## Next steps
 
 * [Azure Key Vault Home Page](https://azure.microsoft.com/services/key-vault/)
