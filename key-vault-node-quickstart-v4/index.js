@@ -20,7 +20,6 @@ var server = http.createServer(function(request, response) {
 });
 
 async function main(){
-
     const result = await client.setSecret(secretName, "MySecretValue");
     console.log("Secret name: ", result.name);
     // Read the secret we created
