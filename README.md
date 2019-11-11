@@ -1,3 +1,26 @@
+---
+page_type: sample
+languages:
+- javascript
+products:
+- azure
+description: "This QuickStart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be  run locally or in Azure."
+urlFragment: key-vault-node-quickstart
+---
+
+# Quickstart: Set and retrieve a secret from Azure Key Vault using a Node Web App 
+
+This Quickstart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be run locally or in Azure. The Quickstart uses Node.js and Managed Service Identities (MSIs)
+
+> * Create a Key Vault.
+> * Store a secret in Key Vault.
+> * Retrieve a secret from Key Vault.
+> * Create an Azure Web Application.
+> * [Enable Managed Service Identities](https://docs.microsoft.com/azure/active-directory/managed-service-identity/overview).
+> * Grant the required permissions for the web application to read data from Key vault.
+
+Before you proceed make sure that you are familiar with the [basic concepts](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview).
+
 ## Prerequisites
 
 * [Node.js](https://nodejs.org)
@@ -222,20 +245,7 @@ When the git push command has completed you can now navigate to https://<AppName
 
 Make sure that you replaced the name <AppName> with your vault name.
 
-# Quickstart: Set and retrieve a secret from Azure Key Vault using a Node Web App 
-
-This Quickstart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be run locally or in Azure. The Quickstart uses Node.js and Managed Service Identities (MSIs)
-
-> * Create a Key Vault.
-> * Store a secret in Key Vault.
-> * Retrieve a secret from Key Vault.
-> * Create an Azure Web Application.
-> * [Enable Managed Service Identities](https://docs.microsoft.com/azure/active-directory/managed-service-identity/overview).
-> * Grant the required permissions for the web application to read data from Key vault.
-
-Before you proceed make sure that you are familiar with the [basic concepts](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview).
-
-# Folders introduction
+# Azure SDK versions
 
 You will find the following folders: key-vault-node-quickstart-3, which references the version 3.0 SDK and keyvault-node-quickstart-v4, which uses the version 4.0 SDK.
 
