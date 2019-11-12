@@ -245,7 +245,7 @@ When the git push command has completed you can now navigate to https://<AppName
 
 Make sure that you replaced the name <AppName> with your vault name.
 
-# Folder introduction
+# Folder Introduction
 
 You will find the following folders: key-vault-node-quickstart-v3, which references the version 3.0 SDK and keyvault-node-quickstart-v4, which uses the version 4.0 SDK.
 
