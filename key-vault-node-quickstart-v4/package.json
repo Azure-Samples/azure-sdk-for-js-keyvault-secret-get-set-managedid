@@ -12,7 +12,7 @@
         "start": "node index.js"
     },
     "dependencies": {
-        "@azure/keyvault-secrets": "4.0.0-preview.4",
-        "@azure/identity": "1.0.0-preview.2"
+        "@azure/keyvault-secrets": "4.0.0",
+        "@azure/identity": "1.0.0"
     }
 }
