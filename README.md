@@ -243,7 +243,7 @@ git push azure master
 
 When the git push command has completed you can now navigate to `https://<AppName>.azurewebsites.net` to see the secret value.
 
-Make sure that you replaced the name <AppName> with your vault name.
+Make sure that you replaced the name `<AppName>` with your vault name.
 
 # Folder Introduction
 
