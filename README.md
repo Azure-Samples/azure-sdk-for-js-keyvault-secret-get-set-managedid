@@ -67,7 +67,7 @@ az keyvault create --name "<YourKeyVaultName>" --resource-group "<YourResourceGr
 
 ## Add a secret to Key Vault
 
-We're adding a secret to help illustrate how secret value works.You could store a SQL connection string or any other information that you need to keep secure and make it available to your application. 
+We're adding a secret to help illustrate how secret value works. You could store a SQL connection string or any other information that you need to keep secure and make it available to your application. 
 
 In this tutorial, the password will be called **AppSecret** and will store the value of **MySecret** in it:
 
