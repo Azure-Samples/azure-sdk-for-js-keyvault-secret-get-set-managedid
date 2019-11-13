@@ -43,7 +43,7 @@ Create a Resource Group with the [az group create](https://docs.microsoft.com/en
 
 When you create a Resource Group you have give it a unique custom name. Please think of a custom name for your Resource Group and replace the text below "YourResourceGroupName" with the custom name you created.
 
-The following example creates a resource group named *<YourResourceGroupName>* in the *eastus* location.
+The following example creates a Resource Group named *<YourResourceGroupName>* in the *eastus* location.
 
 ```azurecli
 # To list locations: az account list-locations --output table
@@ -54,7 +54,7 @@ The Resource Group you just created is used throughout this tutorial.
 
 ## Create an Azure Key Vault
 
-Next you will create a Key Vault using the resource group created in the previous step. Although "ContosoKeyVault" is used as the name for the Key Vault throughout this article, you have to use a unique name. Provide the following information:
+Next you will create a Key Vault using the Resource Group created in the previous step. Although "ContosoKeyVault" is used as the name for the Key Vault throughout this article, you have to use a unique name. Provide the following information:
 
 * Vault name - Create a custom name and replace YourKeyVaultName below.
 * Resource group name - Use the same Resource Group Name you used above.
@@ -116,7 +116,7 @@ To publish this web application to Azure we need to create an Azure App Service,
 
 1. Azure App Service
 
-The first step is to create an [Azure App Service](https://azure.microsoft.com/services/app-service/) Plan. You can store multiple web apps in this plan. Use the resource group that you created earlier in the following command:
+The first step is to create an [Azure App Service](https://azure.microsoft.com/services/app-service/) Plan. You can store multiple web apps in this plan. Use the Resource Group that you created earlier in the following command:
 
     ```
     az appservice plan create --name <MyAppServicePlan> --resource-group <MyResourceGroup>
