@@ -148,7 +148,7 @@ After the web app is created, Azure CLI outputs something similar to the followi
       < JSON data removed for brevity. >
     }
     
-Browse to your newly created web app, and you should see a functioning web app. Replace <AppName> with the unique app name that you chose previously.
+Browse to your newly created web app, and you should see a functioning web app. Replace `<AppName>` with the unique app name that you chose previously.
 
     
     http://<AppName>.azurewebsites.net
@@ -161,7 +161,7 @@ Local Git repository is configured with this url:
 
 3. Deployment User
 
-After running the previous command, you can add an Azure Remote to your local Git repository. Replace ```<url>``` with the URL of the Git Remote that you got from [enabling Git for your app](https://docs.microsoft.com/en-us/azure/app-service/deploy-local-git).
+After running the previous command, you can add an Azure Remote to your local Git repository. Replace `<url>` with the URL of the Git Remote that you got from [enabling Git for your app](https://docs.microsoft.com/en-us/azure/app-service/deploy-local-git).
 
     
     git remote add azure <url>
@@ -241,7 +241,7 @@ Now that everything is deployed and configured, run the following command to dep
 git push azure master
 ```
 
-When the git push command has completed you can now navigate to https://<AppName>.azurewebsites.net to see the secret value.
+When the git push command has completed you can now navigate to `https://<AppName>.azurewebsites.net` to see the secret value.
 
 Make sure that you replaced the name <AppName> with your vault name.
 
