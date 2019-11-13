@@ -155,11 +155,11 @@ Browse to your newly created web app, and you should see a functioning web app. 
     ```
 
 The above command also creates a Git-enabled app which allows you to deploy to Azure from your local git. 
-Local Git repository is configured with this url: 'https://<UserName>@<AppName>.scm.azurewebsites.net/<AppName>.git'
+Local Git repository is configured with this url: "https://<UserName>@<AppName>.scm.azurewebsites.net/<AppName>.git"
 
 3. Deployment User
 
-After running the previous command, you can add an Azure Remote to your local Git repository. Replace <url> with the URL of the Git Remote that you got from [enabling Git for your app](https://docs.microsoft.com/en-us/azure/app-service/deploy-local-git).
+After running the previous command, you can add an Azure Remote to your local Git repository. Replace "<url>" with the URL of the Git Remote that you got from [enabling Git for your app](https://docs.microsoft.com/en-us/azure/app-service/deploy-local-git).
 
     ```
     git remote add azure <url>
