@@ -145,16 +145,16 @@ After the web app is created, Azure CLI outputs something similar to the followi
       "cloningInfo": null,
       "containerSize": 0,
       "dailyMemoryTimeQuota": 0,
-      "defaultHostName": "<AppName>.azurewebsites.net",
+      "defaultHostName": "<appName>.azurewebsites.net",
       "enabled": true,
       "deploymentLocalGitUrl": "https://<username>@<AppName>.scm.azurewebsites.net/<AppName>.git"
       < JSON data removed for brevity. >
     }
     ```
-Browse to your newly created web app, and you should see a functioning web app. Replace <AppName> with the unique app name that you chose previously.
+Browse to your newly created web app, and you should see a functioning web app. Replace <appName> with the unique app name that you chose previously.
 
     ```
-    http://<app name>.azurewebsites.net
+    http://<appName>.azurewebsites.net
     ```
 The above command also creates a Git-enabled app which allows you to deploy to Azure from your local git. 
 Local Git repository is configured with this url: 'https://<username>@<AppName>.scm.azurewebsites.net/<AppName>.git'
