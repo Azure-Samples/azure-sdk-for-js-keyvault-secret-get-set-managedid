@@ -128,13 +128,15 @@ The first step is to create an [Azure App Service](https://azure.microsoft.com/s
 2. Azure Web App
 
 Next we create a web app. In the following example, replace <AppName> with a globally unique app name (valid characters are a-z, 0-9, and -). The runtime is set to NODE|6.9. To see all supported runtimes, run az webapp list-runtimes:
+    
     ```
     # Bash
     az webapp create --resource-group <myResourceGroup> --plan <myAppServicePlan> --name <AppName> --runtime "NODE|6.9" --deployment-local-git
     # PowerShell
     az webapp create --resource-group <myResourceGroup> --plan <myAppServicePlan> --name <AppName> --runtime "NODE|6.9"
     ```
-    After the web app is created, Azure CLI outputs something similar to the following:
+After the web app is created, Azure CLI outputs something similar to the following:
+
     ```
     {
       "availabilityState": "Normal",
@@ -149,17 +151,17 @@ Next we create a web app. In the following example, replace <AppName> with a glo
       < JSON data removed for brevity. >
     }
     ```
-    Browse to your newly created web app, and you should see a functioning web app. Replace <AppName> with the unique app name that you chose previously.
+Browse to your newly created web app, and you should see a functioning web app. Replace <AppName> with the unique app name that you chose previously.
 
     ```
     http://<app name>.azurewebsites.net
     ```
-    The above command also creates a Git-enabled app which allows you to deploy to Azure from your local git. 
-    Local Git repository is configured with this url: 'https://<username>@<AppName>.scm.azurewebsites.net/<AppName>.git'
+The above command also creates a Git-enabled app which allows you to deploy to Azure from your local git. 
+Local Git repository is configured with this url: 'https://<username>@<AppName>.scm.azurewebsites.net/<AppName>.git'
 
 3. Deployment User
 
-    After running the previous command, you can add an Azure Remote to your local Git repository. Replace <url> with the URL of the Git Remote that you got from [enabling Git for your app](https://docs.microsoft.com/en-us/azure/app-service/deploy-local-git).
+After running the previous command, you can add an Azure Remote to your local Git repository. Replace <url> with the URL of the Git Remote that you got from [enabling Git for your app](https://docs.microsoft.com/en-us/azure/app-service/deploy-local-git).
 
     ```
     git remote add azure <url>
