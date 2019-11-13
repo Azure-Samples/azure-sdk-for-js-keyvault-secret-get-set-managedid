@@ -61,7 +61,7 @@ Next you will create a Key Vault using the Resource Group created in the previou
 * The location - Use the same location that you created the Resource Group in above.
 
 ```azurecli
-az keyvault create --name "<YourKeyVaultName>" --resource-group "<YourResourceGroupName>" --location "East US"
+az keyvault create --name "<YourKeyVaultName>" --resource-group "<YourResourceGroupName>" --location eastus
 ```
 
 ## Add a Secret to Key Vault
