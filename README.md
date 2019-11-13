@@ -147,7 +147,7 @@ After the web app is created, Azure CLI outputs something similar to the followi
       "dailyMemoryTimeQuota": 0,
       "defaultHostName": "<appName>.azurewebsites.net",
       "enabled": true,
-      "deploymentLocalGitUrl": "https://<username>@<AppName>.scm.azurewebsites.net/<AppName>.git"
+      "deploymentLocalGitUrl": "https://<userName>@<appName>.scm.azurewebsites.net/<AppName>.git"
       < JSON data removed for brevity. >
     }
     ```
