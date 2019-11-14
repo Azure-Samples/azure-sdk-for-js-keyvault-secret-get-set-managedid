@@ -119,7 +119,7 @@ To publish this web application to Azure we need to create an Azure App Service,
 The first step is to create an [Azure App Service](https://azure.microsoft.com/services/app-service/) Plan. You can store multiple web apps in this plan. Use the Resource Group that you created earlier in the following command:
 
    
-    az appservice plan create --name <MyAppServicePlan> --resource-group <MyResourceGroup>
+    az appservice plan create --name "<MyAppServicePlan>" --resource-group "<MyResourceGroup>"
     
 
 2. Azure Web App
@@ -128,9 +128,9 @@ Next we create a web app. In the following example, replace <AppName> with a glo
  
     
     # Bash
-    az webapp create --resource-group <MyResourceGroup> --plan <MyAppServicePlan> --name <AppName> --runtime "NODE|6.9" --deployment-local-git
+    az webapp create --resource-group "<MyResourceGroup>" --plan "<MyAppServicePlan>" --name "<AppName>" --runtime "NODE|6.9" --deployment-local-git
     # PowerShell
-    az webapp create --resource-group <MyResourceGroup> --plan <MyAppServicePlan> --name <AppName> --runtime "NODE|6.9"
+    az webapp create --resource-group "<MyResourceGroup>" --plan "<MyAppServicePlan>" --name "<AppName>" --runtime "NODE|6.9"
     
 After the web app is created, Azure CLI outputs something similar to the following:
 
@@ -173,14 +173,14 @@ Use the [Azure Cloud Shell](https://shell.azure.com/bash) snippet below to creat
 
 - Create a service principal and configure its access to Azure resources:
   ```Bash
-  az ad sp create-for-rbac -n <AppName> --skip-assignment
+  az ad sp create-for-rbac -n "<AppName>" --skip-assignment
   ```
   Output:
   ```json
   {
     "appId": "generated-app-ID",
-    "displayName": "AppName",
-    "name": "http://AppName",
+    "displayName": "<AppName>",
+    "name": "http://<AppName>",
     "password": "random-password",
     "tenant": "tenant-ID"
   }
@@ -196,7 +196,7 @@ Use the [Azure Cloud Shell](https://shell.azure.com/bash) snippet below to creat
 - Grant the above mentioned application authorization to perform secret operations on the Key Vault:
 
   ```Bash
-  az keyvault set-policy --name <YourKeyVaultName> --spn $AZURE_CLIENT_ID --secret-permissions backup delete get list set
+  az keyvault set-policy --name "<YourKeyVaultName>" --spn $AZURE_CLIENT_ID --secret-permissions backup delete get list set
   ```
 
   > --secret-permissions:
@@ -204,7 +204,7 @@ Use the [Azure Cloud Shell](https://shell.azure.com/bash) snippet below to creat
 
 - Use the above mentioned Key Vault name to retrieve details of your Vault which also contains your Key Vault URL:
   ```Bash
-  az keyvault show --name <YourKeyVaultName>
+  az keyvault show --name "<YourKeyVaultName>"
   ```
 
 ## Enable Managed Service Identity
@@ -214,7 +214,7 @@ Azure Key Vault provides a way to securely store credentials and other keys and 
 Run the "identity assign" command to create an identity for this application, this command is the equivalent of going to the portal and switching **Managed Service Identity** to **On** in the web application properties:
 
 ```azurecli
-az webapp identity assign --name <AppName> --resource-group "<YourResourceGroupName>"
+az webapp identity assign --name "<AppName>" --resource-group "<YourResourceGroupName>"
 ```
 
 ### Assign permissions to your application to read secrets from Key Vault
@@ -230,7 +230,7 @@ Copy the output to text editor for later use. It should be in the following form
 Then, run this command using the name of your Key Vault and the value of PrincipalId copied from above:
 
 ```azurecli
-az keyvault set-policy --name '<YourKeyVaultName>' --object-id <PrincipalId> --secret-permissions get
+az keyvault set-policy --name "<YourKeyVaultName>" --object-id "<PrincipalId>" --secret-permissions get
 ```
 
 ## Deploy the Node App to Azure and retrieve the secret value
