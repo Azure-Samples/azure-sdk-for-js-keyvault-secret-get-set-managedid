@@ -67,7 +67,7 @@ The Resource Group you just created is used throughout this tutorial.
 
 Next you will create a Key Vault using the Resource Group created in the previous step. Provide the following information:
 
-* Vault name - Create a custom name and replace "<MyKeyVaultName>" below.
+* Vault name - Create a custom name and replace `"<MyKeyVaulName>"` below.
 * Resource group name - Use the same Resource Group Name you used above.
 * The location - Use the same location that you created the Resource Group in above.
 
