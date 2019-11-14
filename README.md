@@ -10,16 +10,27 @@ urlFragment: key-vault-node-quickstart
 
 # Quickstart: Set and retrieve a secret from Azure Key Vault using a Node Web App 
 
-This Quickstart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be run locally or in Azure. The Quickstart uses Node.js and Managed Service Identity (MSI)
+This Quickstart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be run locally or in Azure. The Quickstart uses Node.js and Azure Managed Identities
 
 > * Create a Key Vault.
 > * Store a secret in Key Vault.
 > * Retrieve a secret from Key Vault.
 > * Create an Azure Web Application.
-> * [Enable Managed Service Identity](https://docs.microsoft.com/azure/active-directory/managed-service-identity/overview).
+> * [Enable Azure Managed Identities](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/).
 > * Grant the required permissions for the web application to read data from Key vault.
 
 Before you proceed make sure that you are familiar with the [basic concepts](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview).
+
+# SDK Versions
+
+You will find the following folders: key-vault-node-quickstart-v3, which references the version 3.0 SDK and keyvault-node-quickstart-v4, which uses the version 4.0 SDK.
+
+* To use the latest Azure SDK version [key-vault-node-quickstart-v4](./key-vault-node-quickstart-v4) please add the following dependency:
+  * [@azure/identity](https://www.npmjs.com/package/@azure/identity)
+  * [@azure/keyvault-secrets](https://www.npmjs.com/package/@azure/keyvault-secrets)
+* For the previous Azure SDK version [key-vault-node-quickstart-v3](./key-vault-node-quickstart-v3) please add the following dependency:
+  * [ms-rest-azure](https://www.npmjs.com/package/ms-rest-azure)
+  * [azure-keyvault](https://www.npmjs.com/package/azure-keyvault)
 
 ## Prerequisites
 
@@ -41,43 +52,43 @@ az login
 
 Create a Resource Group with the [az group create](https://docs.microsoft.com/en-us/azure/azure-resource-manager/manage-resources-cli) command. An Azure Resource Group is a logical container into which Azure resources are deployed and managed.
 
-When you create a Resource Group you have give it a unique custom name. Please think of a custom name for your Resource Group and replace the text below "YourResourceGroupName" with the custom name you created.
+When you create a Resource Group you have give it a unique custom name. Please think of a custom name for your Resource Group and replace the text below "<MyResourceGroupName>" with the custom name you created.
 
-The following example creates a Resource Group named *<YourResourceGroupName>* in the *eastus* location.
+The following example creates a Resource Group named *<MyResourceGroupName>* in the *eastus* location.
 
 ```azurecli
 # To list locations: az account list-locations --output table
-az group create --name "<YourResourceGroupName>" --location eastus
+az group create --name "<MyResourceGroupName>" --location eastus
 ```
 
 The Resource Group you just created is used throughout this tutorial.
 
 ## Create an Azure Key Vault
 
-Next you will create a Key Vault using the Resource Group created in the previous step. Although "ContosoKeyVault" is used as the name for the Key Vault throughout this article, you have to use a unique name. Provide the following information:
+Next you will create a Key Vault using the Resource Group created in the previous step. Provide the following information:
 
-* Vault name - Create a custom name and replace YourKeyVaultName below.
+* Vault name - Create a custom name and replace "<MyKeyVaultName>" below.
 * Resource group name - Use the same Resource Group Name you used above.
 * The location - Use the same location that you created the Resource Group in above.
 
 ```azurecli
-az keyvault create --name "<YourKeyVaultName>" --resource-group "<YourResourceGroupName>" --location eastus
+az keyvault create --name "<MyKeyVaultName>" --resource-group "<MyResourceGroupName>" --location eastus
 ```
 
 ## Add a Secret to Key Vault
 
-We're adding a Secret to help illustrate how Secret Value works. You could store a SQL connection string or any other information that you need to keep secure and make it available to your application. 
+Next, we'll add a secret to KeyVault to help illustrate how Secret Value works. You could store a SQL connection string or any other information that you need to keep secure and make it available to your application. 
 
 In this tutorial, the password will be called **AppSecret** and will store the value of **MySecret** in it:
 
 ```azurecli
-az keyvault secret set --vault-name "<YourKeyVaultName>" --name "<AppSecret>" --value "<MySecret>"
+az keyvault secret set --vault-name "<MyKeyVaultName>" --name AppSecret --value MySecret
 ```
 
 To view the value contained in the Secret as plain text, please type the following command. This command shows the Secret Information including the URI. After completing these steps, you should have a URI to a Secret in an Azure Key Vault. Copy the output from the previous command to text editor. You will need it later:
 
 ```azurecli
-az keyvault secret show --name "<AppSecret>" --vault-name "<YourKeyVaultName>"
+az keyvault secret show --name AppSecret --vault-name "<MyKeyVaultName>"
 ```
 
 ## Clone the repo
@@ -132,7 +143,7 @@ Next we create a web app. In the following example, replace <AppName> with a glo
     # PowerShell
     az webapp create --resource-group "<MyResourceGroup>" --plan "<MyAppServicePlan>" --name "<AppName>" --runtime "NODE|6.9"
     
-After the web app is created, Azure CLI outputs something similar to the following:
+After the web app is created, the Azure CLI outputs something similar to the following:
 
     
     {
@@ -196,7 +207,7 @@ Use the [Azure Cloud Shell](https://shell.azure.com/bash) snippet below to creat
 - Grant the above mentioned application authorization to perform secret operations on the Key Vault:
 
   ```Bash
-  az keyvault set-policy --name "<YourKeyVaultName>" --spn $AZURE_CLIENT_ID --secret-permissions backup delete get list set
+  az keyvault set-policy --name "<MyKeyVaultName>" --spn $AZURE_CLIENT_ID --secret-permissions backup delete get list set
   ```
 
   > --secret-permissions:
@@ -204,17 +215,17 @@ Use the [Azure Cloud Shell](https://shell.azure.com/bash) snippet below to creat
 
 - Use the above mentioned Key Vault name to retrieve details of your Vault which also contains your Key Vault URL:
   ```Bash
-  az keyvault show --name "<YourKeyVaultName>"
+  az keyvault show --name "<MyKeyVaultName>"
   ```
 
-## Enable Managed Service Identity
+## Enable Azure Managed Identities
 
-Azure Key Vault provides a way to securely store credentials and other keys and secrets, but your code needs to authenticate with Key Vault to retrieve them. Managed Service Identity (MSI) simplifies this need by giving Azure services an automatically managed identity in Azure Active Directory (Azure AD). You can use this identity to authenticate to any service that supports Azure AD authentication, including Key Vault, without having to store any credentials in your code.
+Azure Key Vault provides a way to securely store credentials and other keys and secrets, but your code needs to authenticate with Key Vault to retrieve them. Azure Managed Identities simplifies this need by giving Azure services an automatically managed identity in Azure Active Directory (Azure AD). You can use this identity to authenticate to any service that supports Azure AD authentication, including Key Vault, without having to store any credentials in your code.
 
-Run the "identity assign" command to create an identity for this application, this command is the equivalent of going to the portal and switching **Managed Service Identity** to **On** in the web application properties:
+Run the "identity assign" command to create an identity for this application, this command is the equivalent of going to the portal and switching **Azure Managed Identities** to **On** in the web application properties:
 
 ```azurecli
-az webapp identity assign --name "<AppName>" --resource-group "<YourResourceGroupName>"
+az webapp identity assign --name "<AppName>" --resource-group "<MyResourceGroupName>"
 ```
 
 ### Assign permissions to your application to read secrets from Key Vault
@@ -230,7 +241,7 @@ Copy the output to text editor for later use. It should be in the following form
 Then, run this command using the name of your Key Vault and the value of PrincipalId copied from above:
 
 ```azurecli
-az keyvault set-policy --name "<YourKeyVaultName>" --object-id "<PrincipalId>" --secret-permissions get
+az keyvault set-policy --name "<MyKeyVaultName>" --object-id "<PrincipalId>" --secret-permissions get
 ```
 
 ## Deploy the Node App to Azure and retrieve the secret value
@@ -245,17 +256,6 @@ When the git push command has completed you can now navigate to `https://<AppNam
 
 Make sure that you replaced the name `<AppName>` with your vault name.
 
-# Folder Introduction
-
-You will find the following folders: key-vault-node-quickstart-v3, which references the version 3.0 SDK and keyvault-node-quickstart-v4, which uses the version 4.0 SDK.
-
-* To use the latest Azure SDK version [key-vault-node-quickstart-v4] please add the following dependency:
-  * [@azure/identity](https://www.npmjs.com/package/@azure/identity)
-  * [@azure/keyvault-secrets](https://www.npmjs.com/package/@azure/keyvault-secrets)
-* For the previous stable Azure SDK version [key-vault-node-quickstart-v3] please add the following dependency:
-  * [ms-rest-azure](https://www.npmjs.com/package/ms-rest-azure)
-  * [azure-keyvault](https://www.npmjs.com/package/azure-keyvault)
-
 ## Next steps
 
 * [Azure Key Vault Home Page](https://azure.microsoft.com/services/key-vault/)
@@ -263,6 +263,6 @@ You will find the following folders: key-vault-node-quickstart-v3, which referen
 * [Azure SDK For Node.js](https://docs.microsoft.com/javascript/api/overview/azure/key-vault)
 * [Azure REST API Reference](https://docs.microsoft.com/rest/api/keyvault/)
 
-# Contributing
+## Contributing
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
