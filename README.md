@@ -52,7 +52,7 @@ az login
 
 Create a Resource Group with the [az group create](https://docs.microsoft.com/en-us/azure/azure-resource-manager/manage-resources-cli) command. An Azure Resource Group is a logical container into which Azure resources are deployed and managed.
 
-When you create a Resource Group you have give it a unique custom name. Please think of a custom name for your Resource Group and replace the text below "<MyResourceGroupName>" with the custom name you created.
+When you create a Resource Group you have give it a unique custom name. Please think of a custom name for your Resource Group and replace the text below `"<MyResourceGroupName>"` with the custom name you created.
 
 The following example creates a Resource Group named *<MyResourceGroupName>* in the *eastus* location.
 
