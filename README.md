@@ -4,7 +4,7 @@ languages:
 - javascript
 products:
 - azure
-description: "This QuickStart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be  run locally or in Azure."
+description: "This QuickStart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be run locally or in Azure."
 urlFragment: key-vault-node-quickstart
 ---
 
@@ -218,11 +218,11 @@ Use the [Azure Cloud Shell](https://shell.azure.com/bash) snippet below to creat
   az keyvault show --name "<MyKeyVaultName>"
   ```
 
-## Enable Azure Managed Identities
+## Enable Azure Managed Identity
 
-Azure Key Vault provides a way to securely store credentials and other keys and secrets, but your code needs to authenticate with Key Vault to retrieve them. Azure Managed Identities simplifies this need by giving Azure services an automatically managed identity in Azure Active Directory (Azure AD). You can use this identity to authenticate to any service that supports Azure AD authentication, including Key Vault, without having to store any credentials in your code.
+Azure Key Vault provides a way to securely store credentials and other keys and secrets, but your code needs to be authenticated to Key Vault before retrieving them. Azure Managed Identity simplifies this need by giving Azure services an automatically managed identity in Azure Active Directory (Azure AD). You can use this identity to authenticate to any service that supports Azure AD authentication, including Key Vault, without having to store any credentials in your code.
 
-Run the "identity assign" command to create an identity for this application, this command is the equivalent of going to the portal and switching **Azure Managed Identities** to **On** in the web application properties:
+Run the "identity assign" command to create an identity for this application, this command is the equivalent of going to the portal and switching **Azure Managed Identity** to **On** in the web application properties:
 
 ```azurecli
 az webapp identity assign --name "<AppName>" --resource-group "<MyResourceGroupName>"
