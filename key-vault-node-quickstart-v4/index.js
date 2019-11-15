@@ -11,7 +11,7 @@ const vaultName = process.env["KEYVAULT_NAME"] || "<YourVaultName>";
 const url = `https://${vaultName}.vault.azure.net`;
   
 const client = new SecretsClient(url, credential);
-// Create a secret
+
 const secretName = "MySecretName";
 
 var server = http.createServer(function(request, response) {
@@ -19,6 +19,7 @@ var server = http.createServer(function(request, response) {
 });
 
 async function main(){
+    // Create a secret
     const result = await client.setSecret(secretName, "MySecretValue");
     console.log("Secret name: ", result.name);
     // Read the secret we created
