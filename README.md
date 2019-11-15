@@ -125,7 +125,7 @@ npm install
 
 To publish this web application to Azure we need to create an Azure App Service, Azure Web App, and create a Deployment User.
 
-1. Azure App Service
+**1. Azure App Service**
 
 The first step is to create an [Azure App Service](https://azure.microsoft.com/services/app-service/) Plan. You can store multiple web apps in this plan. Use the Resource Group that you created earlier in the following command:
 
@@ -133,7 +133,7 @@ The first step is to create an [Azure App Service](https://azure.microsoft.com/s
     az appservice plan create --name "<MyAppServicePlan>" --resource-group "<MyResourceGroup>"
     
 
-2. Azure Web App
+**2. Azure Web App**
 
 Next we create a web app. In the following example, replace <AppName> with a globally unique app name (valid characters are a-z, 0-9, and -). The runtime is set to NODE|6.9. To see all supported runtimes, run az webapp list-runtimes:
  
@@ -170,7 +170,7 @@ Local Git repository is configured with this url:
 
     https://<UserName>@<AppName>.scm.azurewebsites.net/<AppName>.git
 
-3. Deployment User
+**3. Deployment User**
 
 After running the previous command, you can add an Azure Remote to your local Git repository. Replace `<url>` with the URL of the Git Remote that you got from [enabling Git for your app](https://docs.microsoft.com/en-us/azure/app-service/deploy-local-git).
 
