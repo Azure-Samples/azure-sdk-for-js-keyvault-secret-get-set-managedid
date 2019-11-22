@@ -2,123 +2,161 @@
 page_type: sample
 languages:
 - javascript
+- nodejs
 products:
+- azure-key-vault
 - azure
-description: "This QuickStart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be  run locally or in Azure."
+description: "This QuickStart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be run locally or in Azure."
 urlFragment: key-vault-node-quickstart
 ---
 
 # Quickstart: Set and retrieve a secret from Azure Key Vault using a Node Web App 
 
-This QuickStart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be  run locally or in Azure. The quickstart uses Node.js and Managed service identities (MSIs)
+This Quickstart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be run locally or in Azure. The Quickstart uses Node.js and [Azure Managed Identities](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/)
 
 > * Create a Key Vault.
 > * Store a secret in Key Vault.
 > * Retrieve a secret from Key Vault.
 > * Create an Azure Web Application.
-> * [Enable managed service identities](https://docs.microsoft.com/azure/active-directory/managed-service-identity/overview).
+> * [Enable Azure Managed Identities](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/).
 > * Grant the required permissions for the web application to read data from Key vault.
 
-Before you proceed make sure that you are familiar with the [basic concepts](key-vault-whatis.md#basic-concepts).
+Before you proceed make sure that you are familiar with the [Key Vault Concepts](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview).
+
+# SDK Versions
+
+In this sample, you will find the following folders:
+* **key-vault-node-quickstart-v3** - references Key Vault SDK v3.0
+* **key-vault-node-quickstart-v4** - references Key Vault SDK v4.0
+
+
+* To use the latest Azure SDK version [key-vault-node-quickstart-v4](./key-vault-node-quickstart-v4) please add the following dependency:
+  * [@azure/identity](https://www.npmjs.com/package/@azure/identity)
+  * [@azure/keyvault-secrets](https://www.npmjs.com/package/@azure/keyvault-secrets)
+* For the previous Azure SDK version [key-vault-node-quickstart-v3](./key-vault-node-quickstart-v3) please add the following dependency:
+  * [ms-rest-azure](https://www.npmjs.com/package/ms-rest-azure)
+  * [azure-keyvault](https://www.npmjs.com/package/azure-keyvault)
 
 ## Prerequisites
 
-* [Node JS](https://nodejs.org/en/)
+* [Node.js](https://nodejs.org)
 * [Git](https://www.git-scm.com/)
 * [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) 2.0.4 or later
 * An Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
 
-## Login to Azure
+## Log in to Azure
 
-To log in to Azure using the CLI, you can type:
+1. Open a command prompt, i.e. cmd, terminal, etc
+2. Execute the following command to log in to Azure
 
-```azurecli
+```Bash
 az login
 ```
 
-## Create resource group
+## Create Resource Group
 
-Create a resource group with the [az group create](/cli/azure/group#az-group-create) command. An Azure resource group is a logical container into which Azure resources are deployed and managed.
+**1. What is a Resource Group**
 
-Please select a Resource Group name and fill in the placeholder.
-The following example creates a resource group named *<YourResourceGroupName>* in the *eastus* location.
+An Azure Resource Group is a logical container into which Azure resources are deployed and managed.
 
-```azurecli
+**2. How to create a Resource Group**
+
+Create a Resource Group with the [az group create](https://docs.microsoft.com/en-us/azure/azure-resource-manager/manage-resources-cli) command.  
+
+When you create a Resource Group you have give it a unique custom name. Please think of a custom name for your Resource Group and replace the text below `"<MyResourceGroupName>"` with the custom name you created.
+
+The following example creates a Resource Group named *<MyResourceGroupName>* in the *eastus* location.
+
+```Bash
 # To list locations: az account list-locations --output table
-az group create --name "<YourResourceGroupName>" --location "East US"
+az group create --name "<MyResourceGroupName>" --location eastus
 ```
 
-The resource group you just created is used throughout this tutorial.
+The Resource Group you just created is used throughout this tutorial.
 
 ## Create an Azure Key Vault
 
-Next you create a Key Vault using the resource group created in the previous step. Although “ContosoKeyVault” is used as the name for the Key Vault throughout this article, you have to use a unique name. Provide the following information:
+Next you will create a Key Vault using the Resource Group created in the previous step. Provide the following information:
 
-* Vault name - **Select a Key Vault Name here**.
-* Resource group name - **Select a Resource Group Name here**.
-* The location - **East US**.
+* Vault name - Create a custom name and replace `"<MyKeyVaulName>"` below.
+* Resource group name - Use the same Resource Group Name you used above.
+* The location - Use the same location that you created the Resource Group in above.
 
-```azurecli
-az keyvault create --name "<YourKeyVaultName>" --resource-group "<YourResourceGroupName>" --location "East US"
+```Bash
+az keyvault create --name "<MyKeyVaultName>" --resource-group "<MyResourceGroupName>" --location eastus
 ```
 
-At this point, your Azure account is the only one authorized to perform any operations on this new vault.
+## Add a Secret to Key Vault
 
-## Add a secret to key vault
+Next, we'll add a secret to Key Vault to help illustrate how Secret Value works. You could store an SQL connection string or any other information that you need to keep secure and make it available to your application. 
 
-We're adding a secret to help illustrate how this works. You could be storing a SQL connection string or any other information that you need to keep securely but make available to your application. In this tutorial, the password will be called **AppSecret** and will store the value of **MySecret** in it.
+In this tutorial, the password will be called **AppSecret** and will store the value of **MySecret** in it:
 
-Type the commands below to create a secret in Key Vault called **AppSecret** that will store the value **MySecret**:
-
-```azurecli
-az keyvault secret set --vault-name "<YourKeyVaultName>" --name "AppSecret" --value "MySecret"
+```Bash
+az keyvault secret set --vault-name "<MyKeyVaultName>" --name AppSecret --value MySecret
 ```
 
-To view the value contained in the secret as plain text:
+To view the value contained in the Secret as plain text, please type the following command. This command shows the Secret Information including the URI. After completing these steps, you should have a URI to a Secret in an Azure Key Vault. Copy the output from the previous command to text editor. You will need it later:
 
-```azurecli
-az keyvault secret show --name "AppSecret" --vault-name "<YourKeyVaultName>"
+```Bash
+az keyvault secret show --name AppSecret --vault-name "<MyKeyVaultName>"
 ```
 
-This command shows the secret information including the URI. After completing these steps, you should have a URI to a secret in an Azure Key Vault. Write this information down. You need it in a later step.
+## Clone the repo
 
-## Clone the Repo
+Run the following command to clone this Quickstart code to your local machine:
 
-Clone the repo in order to make a local copy for you to edit the source by running the following command:
-
-```
+```Bash
 git clone https://github.com/Azure-Samples/key-vault-node-quickstart.git
 ```
 
 ## Install dependencies
 
-Here we install the dependencies. Run the following commands
-    cd key-vault-node-quickstart
-    npm install
+Run the following command to install dependencies for "SDK version 3.0" and "SDK version 4.0":
 
-This project used 2 node modules:
+- SDK version 4.0
 
-* [ms-rest-azure](https://www.npmjs.com/package/ms-rest-azure) 
-* [azure-keyvault](https://www.npmjs.com/package/azure-keyvault)
+```Bash
+cd key-vault-node-quickstart-v4 
+```
+```Bash
+npm install
+```
+
+- SDK version 3.0
+
+```Bash
+cd key-vault-node-quickstart-v3 
+```
+```Bash
+npm install
+```
 
 ## Publish the web application to Azure
 
-Below are the few steps we need to do
+To publish this web application to Azure, we need to create an Azure App Service, Azure Web App, and create a Deployment User.
 
-- The 1st step is to create a [Azure App Service](https://azure.microsoft.com/services/app-service/) Plan. You can store multiple web apps in this plan.
+**1. Azure App Service**
 
-    ```
-    az appservice plan create --name myAppServicePlan --resource-group myResourceGroup
-    ```
-- Next we create a web app. In the following example, replace <app_name> with a globally unique app name (valid characters are a-z, 0-9, and -). The runtime is set to NODE|6.9. To see all supported runtimes, run az webapp list-runtimes
-    ```
+The first step is to create an [Azure App Service](https://azure.microsoft.com/services/app-service/) Plan. You can store multiple web apps in this plan. Use the Resource Group that you created earlier in the following command:
+
+```Bash
+az appservice plan create --name "<MyAppServicePlan>" --resource-group "<MyResourceGroup>"
+```    
+
+**2. Azure Web App**
+
+Next we create a web app. In the following example, replace <AppName> with a globally unique app name (valid characters are a-z, 0-9, and -). The runtime is set to NODE|6.9. To see all supported runtimes, run az webapp list-runtimes:
+ 
+    
     # Bash
-    az webapp create --resource-group myResourceGroup --plan myAppServicePlan --name <app_name> --runtime "NODE|6.9" --deployment-local-git
+    az webapp create --resource-group "<MyResourceGroup>" --plan "<MyAppServicePlan>" --name "<AppName>" --runtime "NODE|6.9" --deployment-local-git
     # PowerShell
-    az --% webapp create --resource-group myResourceGroup --plan myAppServicePlan --name <app_name> --runtime "NODE|6.9"
-    ```
-    When the web app has been created, the Azure CLI shows output similar to the following example:
-    ```
+    az webapp create --resource-group "<MyResourceGroup>" --plan "<MyAppServicePlan>" --name "<AppName>" --runtime "NODE|6.9"
+    
+After the web app is created, the Azure CLI outputs something similar to the following:
+
+    
     {
       "availabilityState": "Normal",
       "clientAffinityEnabled": true,
@@ -126,42 +164,84 @@ Below are the few steps we need to do
       "cloningInfo": null,
       "containerSize": 0,
       "dailyMemoryTimeQuota": 0,
-      "defaultHostName": "<app_name>.azurewebsites.net",
+      "defaultHostName": "<AppName>.azurewebsites.net",
       "enabled": true,
-      "deploymentLocalGitUrl": "https://<username>@<app_name>.scm.azurewebsites.net/<app_name>.git"
+      "deploymentLocalGitUrl": "https://<UserName>@<AppName>.scm.azurewebsites.net/<AppName>.git"
       < JSON data removed for brevity. >
     }
-    ```
-    Browse to your newly created web app and you should see a functioning web app. Replace <app_name> with a unique app name.
+    
+Browse to your newly created web app, and you should see a functioning web app. Replace `<AppName>` with the unique app name that you chose previously.
 
-    ```
-    http://<app name>.azurewebsites.net
-    ```
-    The above command also creates a Git-enabled app which allows you to deploy to azure from your local git. 
-    Local git is configured with url of 'https://<username>@<app_name>.scm.azurewebsites.net/<app_name>.git'
+```Bash    
+http://<AppName>.azurewebsites.net
+```    
 
-- Create a deployment user
-    After the previous command is completed you can add add an Azure remote to your local Git repository. Replace <url> with the URL of the Git remote that you got from Enable Git for your app.
+The above command also creates a Git-enabled app which allows you to deploy to Azure from your local git. 
+Local Git repository is configured with this url: 
 
-    ```
-    git remote add azure <url>
-    ```
-
-## Enable Managed Service Identity
-
-Azure Key Vault provides a way to securely store credentials and other keys and secrets, but your code needs to authenticate to Key Vault to retrieve them. Managed Service Identity (MSI) makes solving this problem simpler by giving Azure services an automatically managed identity in Azure Active Directory (Azure AD). You can use this identity to authenticate to any service that supports Azure AD authentication, including Key Vault, without having any credentials in your code.
-
-Run the assign-identity command to create the identity for this application:
-
-```azurecli
-az webapp identity assign --name <app_name> --resource-group "<YourResourceGroupName>"
+```Bash
+https://<UserName>@<AppName>.scm.azurewebsites.net/<AppName>.git
 ```
 
-This command is the equivalent of going to the portal and switching **Managed service identity** to **On** in the web application properties.
+**3. Deployment User**
+
+After running the previous command, you can add an Azure Remote to your local Git repository. Replace `<url>` with the URL of the Git Remote that you got from [enabling Git for your app](https://docs.microsoft.com/en-us/azure/app-service/deploy-local-git).
+
+```Bash    
+git remote add azure <url>
+```    
+
+### Configuring your Key Vault
+
+- Create a service principal and configure its access to Azure resources:
+  ```Bash
+  az ad sp create-for-rbac -n "<AppName>" --skip-assignment
+  ```
+  Output:
+  ```json
+  {
+    "appId": "generated-app-ID",
+    "displayName": "<AppName>",
+    "name": "http://<AppName>",
+    "password": "random-password",
+    "tenant": "tenant-ID"
+  }
+  ```
+- Use the above returned credentials information to set **AZURE_CLIENT_ID**(appId), **AZURE_CLIENT_SECRET**(password) and **AZURE_TENANT_ID**(tenant) environment variables. The following example shows a way to do this in Bash:
+
+  ```Bash
+    export AZURE_CLIENT_ID="generated-app-ID"
+    export AZURE_CLIENT_SECRET="random-password"
+    export AZURE_TENANT_ID="tenant-ID"
+  ```
+
+- Grant the above mentioned application authorization to perform secret operations on the Key Vault:
+
+  ```Bash
+  az keyvault set-policy --name "<MyKeyVaultName>" --spn $AZURE_CLIENT_ID --secret-permissions backup delete get list set
+  ```
+
+  > --secret-permissions:
+  > Accepted values: backup, delete, get, list, purge, recover, restore, set
+
+- Use the above mentioned Key Vault name to retrieve details of your Vault which also contains your Key Vault URL:
+  ```Bash
+  az keyvault show --name "<MyKeyVaultName>"
+  ```
+
+## Enable Azure Managed Identities
+
+Azure Key Vault provides a way to securely store credentials and other keys and secrets, but your code needs to be authenticated to Key Vault before retrieving them. Azure Managed Identities simplify this need by giving Azure services an automatically managed identity in Azure Active Directory (Azure AD). You can use this identity to authenticate to any service that supports Azure AD authentication, including Key Vault, without having to store any credentials in your code.
+
+Run the "identity assign" command to create an identity for this application, this command is the equivalent of going to the portal and switching **Azure Managed Identities** to **On** in the web application properties:
+
+```Bash
+az webapp identity assign --name "<AppName>" --resource-group "<MyResourceGroupName>"
+```
 
 ### Assign permissions to your application to read secrets from Key Vault
 
-Write down or copy the output of the command above. It should be in the format:
+Copy the output to text editor for later use. It should be in the following format:
         
         {
           "principalId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -171,26 +251,27 @@ Write down or copy the output of the command above. It should be in the format:
         
 Then, run this command using the name of your Key Vault and the value of PrincipalId copied from above:
 
-```azurecli
-az keyvault set-policy --name '<YourKeyVaultName>' --object-id <PrincipalId> --secret-permissions get
+```Bash
+az keyvault set-policy --name "<MyKeyVaultName>" --object-id "<PrincipalId>" --secret-permissions get
 ```
 
 ## Deploy the Node App to Azure and retrieve the secret value
 
-Now that everything is set. Run the following command to deploy the app to Azure
+Now that everything is deployed and configured, run the following command to deploy the app to Azure. This will push your local master branch to the git remote called 'azure' that you created earlier:
 
-```
+```Bash
 git push azure master
 ```
 
-After this when you browse https://<app_name>.azurewebsites.net you can see the secret value.
-Make sure that you replaced the name <YourKeyVaultName> with your vault name
+When the git push command has completed you can now navigate to `https://<AppName>.azurewebsites.net` to see the secret value.
+
+Make sure that you replaced the name `<AppName>` with your vault name.
 
 ## Next steps
 
 * [Azure Key Vault Home Page](https://azure.microsoft.com/services/key-vault/)
 * [Azure Key Vault Documentation](https://docs.microsoft.com/azure/key-vault/)
-* [Azure SDK For Node](https://docs.microsoft.com/javascript/api/overview/azure/key-vault)
+* [Azure SDK For Node.js](https://docs.microsoft.com/javascript/api/overview/azure/key-vault)
 * [Azure REST API Reference](https://docs.microsoft.com/rest/api/keyvault/)
 
 ## Contributing
