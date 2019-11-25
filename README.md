@@ -7,7 +7,8 @@ products:
 - azure-key-vault
 - azure
 description: "This Quickstart shows how to set and get secrets from Azure Key Vault using Node.js."
-urlFragment: get-set-keyvault-secrets-managed-id-nodejs
+urlFragment: 
+- get-set-keyvault-secrets-managed-id-nodejs
 ---
 
 # Quickstart: Set and retrieve a secret from Azure Key Vault using a Node Web App 
@@ -107,7 +108,7 @@ az keyvault secret show --name AppSecret --vault-name "<MyKeyVaultName>"
 Run the following command to clone this Quickstart code to your local machine:
 
 ```Bash
-git clone https://github.com/Azure-Samples/key-vault-node-quickstart.git
+git clone https://github.com/Azure-Samples/azure-sdk-for-js-keyvault-secret-get-set-managedid.git
 ```
 
 ## Install dependencies
