@@ -6,8 +6,8 @@ languages:
 products:
 - azure-key-vault
 - azure
-description: "This QuickStart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be run locally or in Azure."
-urlFragment: key-vault-node-quickstart
+description: "How to set and get secrets from Azure Key Vault using Node.js."
+urlFragment: get-set-keyvault-secrets-managed-id-nodejs
 ---
 
 # Quickstart: Set and retrieve a secret from Azure Key Vault using a Node Web App 
@@ -271,7 +271,7 @@ Make sure that you replaced the name `<AppName>` with your vault name.
 
 * [Azure Key Vault Home Page](https://azure.microsoft.com/services/key-vault/)
 * [Azure Key Vault Documentation](https://docs.microsoft.com/azure/key-vault/)
-* [Azure SDK For Node.js](https://docs.microsoft.com/javascript/api/overview/azure/key-vault)
+* [Azure SDK For JavaScript](https://docs.microsoft.com/javascript/api/overview/azure/key-vault)
 * [Azure REST API Reference](https://docs.microsoft.com/rest/api/keyvault/)
 
 ## Contributing
