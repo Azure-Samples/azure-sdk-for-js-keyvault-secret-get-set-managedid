@@ -26,14 +26,14 @@ Before you proceed make sure that you are familiar with the [Key Vault Concepts]
 # SDK Versions
 
 In this sample, you will find the following folders:
-* **key-vault-node-quickstart-v3** - references Key Vault SDK v3.0
-* **key-vault-node-quickstart-v4** - references Key Vault SDK v4.0
+* **get-set-keyvault-secrets-managed-id-nodejs-v3** - references Key Vault SDK v3.0
+* **get-set-keyvault-secrets-managed-id-nodejs-v4** - references Key Vault SDK v4.0
 
 
-* To use the latest Azure SDK version [key-vault-node-quickstart-v4](./key-vault-node-quickstart-v4) please add the following dependency:
+* To use the latest Azure SDK version [get-set-keyvault-secrets-managed-id-nodejs-v4](./get-set-keyvault-secrets-managed-id-nodejs-v4) please add the following dependency:
   * [@azure/identity](https://www.npmjs.com/package/@azure/identity)
   * [@azure/keyvault-secrets](https://www.npmjs.com/package/@azure/keyvault-secrets)
-* For the previous Azure SDK version [key-vault-node-quickstart-v3](./key-vault-node-quickstart-v3) please add the following dependency:
+* For the previous Azure SDK version [get-set-keyvault-secrets-managed-id-nodejs-v3](./get-set-keyvault-secrets-managed-id-nodejs-v3) please add the following dependency:
   * [ms-rest-azure](https://www.npmjs.com/package/ms-rest-azure)
   * [azure-keyvault](https://www.npmjs.com/package/azure-keyvault)
 
@@ -117,7 +117,7 @@ Run the following command to install dependencies for "SDK version 3.0" and "SDK
 - SDK version 4.0
 
 ```Bash
-cd key-vault-node-quickstart-v4 
+cd get-set-keyvault-secrets-managed-id-nodejs-v4 
 ```
 ```Bash
 npm install
@@ -126,7 +126,7 @@ npm install
 - SDK version 3.0
 
 ```Bash
-cd key-vault-node-quickstart-v3 
+cd get-set-keyvault-secrets-managed-id-nodejs-v3 
 ```
 ```Bash
 npm install
