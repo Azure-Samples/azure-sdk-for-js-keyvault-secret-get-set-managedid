@@ -11,7 +11,7 @@ urlFragment:
 - get-set-keyvault-secrets-managed-id-nodejs
 ---
 
-# Quickstart: Set and retrieve a secret from Azure Key Vault using a Node Web App 
+# How to set and get secrets from Azure Key Vault using Node.js 
 
 This Quickstart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be run locally or in Azure. The Quickstart uses Node.js and [Azure Managed Identities](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/)
 
