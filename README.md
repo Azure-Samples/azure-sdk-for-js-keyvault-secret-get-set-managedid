@@ -6,14 +6,14 @@ languages:
 products:
 - azure-key-vault
 - azure
-description: "This Quickstart shows how to set and get secrets from Azure Key Vault using Node.js."
+description: "This sample shows how to set and get secrets from Azure Key Vault using Node.js."
 urlFragment: 
 - get-set-keyvault-secrets-managed-id-nodejs
 ---
 
 # How to set and get secrets from Azure Key Vault using Node.js 
 
-This Quickstart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be run locally or in Azure. The Quickstart uses Node.js and [Azure Managed Identities](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/)
+This sample shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be run locally or in Azure. The sample uses Node.js and [Azure Managed Identities](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/)
 
 > * Create a Key Vault.
 > * Store a secret in Key Vault.
