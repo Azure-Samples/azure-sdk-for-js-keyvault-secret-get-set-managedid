@@ -6,7 +6,7 @@ languages:
 products:
 - azure-key-vault
 - azure
-description: "How to set and get secrets from Azure Key Vault using Node.js."
+description: "This Quickstart shows how to set and get secrets from Azure Key Vault using Node.js."
 urlFragment: get-set-keyvault-secrets-managed-id-nodejs
 ---
 
