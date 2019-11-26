@@ -6,13 +6,14 @@ languages:
 products:
 - azure-key-vault
 - azure
-description: "This QuickStart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be run locally or in Azure."
-urlFragment: key-vault-node-quickstart
+description: "This sample shows how to set and get secrets from Azure Key Vault using Node.js."
+urlFragment: 
+- get-set-keyvault-secrets-managed-id-nodejs
 ---
 
-# Quickstart: Set and retrieve a secret from Azure Key Vault using a Node Web App 
+# How to set and get secrets from Azure Key Vault using Node.js 
 
-This Quickstart shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be run locally or in Azure. The Quickstart uses Node.js and [Azure Managed Identities](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/)
+This sample shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be run locally or in Azure. The sample uses Node.js and [Azure Managed Identities](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/)
 
 > * Create a Key Vault.
 > * Store a secret in Key Vault.
@@ -26,14 +27,14 @@ Before you proceed make sure that you are familiar with the [Key Vault Concepts]
 # SDK Versions
 
 In this sample, you will find the following folders:
-* **key-vault-node-quickstart-v3** - references Key Vault SDK v3.0
-* **key-vault-node-quickstart-v4** - references Key Vault SDK v4.0
+* **azure-sdk-for-js-keyvault-secret-get-set-managedid-v3** - references Key Vault SDK v3.0
+* **azure-sdk-for-js-keyvault-secret-get-set-managedid-v4** - references Key Vault SDK v4.0
 
 
-* To use the latest Azure SDK version [key-vault-node-quickstart-v4](./key-vault-node-quickstart-v4) please add the following dependency:
+* To use the latest Azure SDK version [azure-sdk-for-js-keyvault-secret-get-set-managedid-v4](https://github.com/Azure-Samples/azure-sdk-for-js-keyvault-secret-get-set-managedid/tree/master/azure-sdk-for-js-keyvault-secret-get-set-managedid-v4) please add the following dependency:
   * [@azure/identity](https://www.npmjs.com/package/@azure/identity)
   * [@azure/keyvault-secrets](https://www.npmjs.com/package/@azure/keyvault-secrets)
-* For the previous Azure SDK version [key-vault-node-quickstart-v3](./key-vault-node-quickstart-v3) please add the following dependency:
+* For the previous Azure SDK version [azure-sdk-for-js-keyvault-secret-get-set-managedid-v3](https://github.com/Azure-Samples/azure-sdk-for-js-keyvault-secret-get-set-managedid/tree/master/azure-sdk-for-js-keyvault-secret-get-set-managedid-v3) please add the following dependency:
   * [ms-rest-azure](https://www.npmjs.com/package/ms-rest-azure)
   * [azure-keyvault](https://www.npmjs.com/package/azure-keyvault)
 
@@ -107,7 +108,7 @@ az keyvault secret show --name AppSecret --vault-name "<MyKeyVaultName>"
 Run the following command to clone this Quickstart code to your local machine:
 
 ```Bash
-git clone https://github.com/Azure-Samples/key-vault-node-quickstart.git
+git clone https://github.com/Azure-Samples/azure-sdk-for-js-keyvault-secret-get-set-managedid.git
 ```
 
 ## Install dependencies
@@ -117,7 +118,7 @@ Run the following command to install dependencies for "SDK version 3.0" and "SDK
 - SDK version 4.0
 
 ```Bash
-cd key-vault-node-quickstart-v4 
+cd azure-sdk-for-js-keyvault-secret-get-set-managedid-v4 
 ```
 ```Bash
 npm install
@@ -126,7 +127,7 @@ npm install
 - SDK version 3.0
 
 ```Bash
-cd key-vault-node-quickstart-v3 
+cd azure-sdk-for-js-keyvault-secret-get-set-managedid-v3 
 ```
 ```Bash
 npm install
@@ -271,7 +272,7 @@ Make sure that you replaced the name `<AppName>` with your vault name.
 
 * [Azure Key Vault Home Page](https://azure.microsoft.com/services/key-vault/)
 * [Azure Key Vault Documentation](https://docs.microsoft.com/azure/key-vault/)
-* [Azure SDK For Node.js](https://docs.microsoft.com/javascript/api/overview/azure/key-vault)
+* [Azure SDK For JavaScript](https://docs.microsoft.com/javascript/api/overview/azure/key-vault)
 * [Azure REST API Reference](https://docs.microsoft.com/rest/api/keyvault/)
 
 ## Contributing
