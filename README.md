@@ -24,7 +24,7 @@ This sample shows how to store a secret in Key Vault and how to retrieve it usin
 
 Before you proceed make sure that you are familiar with the [Key Vault Concepts].
 
-# SDK Versions
+## SDK Versions
 
 In this sample, you will find the following folders:
 * **azure-sdk-for-js-keyvault-secret-get-set-managedid-v3** - references Key Vault SDK v3
