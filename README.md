@@ -29,14 +29,6 @@ In this sample, you will find the following folders:
 * **azure-sdk-for-js-keyvault-secret-get-set-managedid-v3** - references Key Vault SDK v3
 * **azure-sdk-for-js-keyvault-secret-get-set-managedid-v4** - references Key Vault SDK v4
 
-
-* To use the latest Azure SDK version [azure-sdk-for-js-keyvault-secret-get-set-managedid-v4] please add the following dependency:
-  * [@azure/identity]
-  * [@azure/keyvault-secrets]
-* For the previous Azure SDK version [azure-sdk-for-js-keyvault-secret-get-set-managedid-v3] please add the following dependency:
-  * [ms-rest-azure]
-  * [azure-keyvault]
-
 ## Prerequisites
 
 * [Node.js]
@@ -283,12 +275,6 @@ This project has adopted the [Microsoft Open Source Code of Conduct]. For more i
 [Azure Managed Identities]: https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/
 [Enable Azure Managed Identities]: https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/
 [Key Vault Concepts]: https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview
-[azure-sdk-for-js-keyvault-secret-get-set-managedid-v4]: https://github.com/Azure-Samples/azure-sdk-for-js-keyvault-secret-get-set-managedid/tree/master/azure-sdk-for-js-keyvault-secret-get-set-managedid-v4
-[@azure/identity]: https://www.npmjs.com/package/@azure/identity
-[@azure/keyvault-secrets]: https://www.npmjs.com/package/@azure/keyvault-secrets
-[azure-sdk-for-js-keyvault-secret-get-set-managedid-v3]: https://github.com/Azure-Samples/azure-sdk-for-js-keyvault-secret-get-set-managedid/tree/master/azure-sdk-for-js-keyvault-secret-get-set-managedid-v3
-[ms-rest-azure]: https://www.npmjs.com/package/ms-rest-azure
-[azure-keyvault]: https://www.npmjs.com/package/azure-keyvault
 [Node.js]: https://nodejs.org
 [Git]: https://www.git-scm.com/
 [Azure CLI]: https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest
