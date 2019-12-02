@@ -109,7 +109,7 @@ Run the following command to install dependencies for "SDK version 3.0" and "SDK
 - SDK version 4.0
 
 ```Bash
-cd azure-sdk-for-js-keyvault-secret-get-set-managedid-v4 
+cd v4 
 ```
 ```Bash
 npm install
@@ -118,7 +118,7 @@ npm install
 - SDK version 3.0
 
 ```Bash
-cd azure-sdk-for-js-keyvault-secret-get-set-managedid-v3 
+cd v3 
 ```
 ```Bash
 npm install
