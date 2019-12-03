@@ -104,9 +104,9 @@ git clone https://github.com/Azure-Samples/azure-sdk-for-js-keyvault-secret-get-
 
 ### Install dependencies
 
-Run the following command to install dependencies for "SDK version 3.0" and "SDK version 4.0":
+Run the following command to install dependencies for "SDK version 3" and "SDK version 4":
 
-- SDK version 4.0
+- SDK version 4
 
 ```Bash
 cd v4 
@@ -115,7 +115,7 @@ cd v4
 npm install
 ```
 
-- SDK version 3.0
+- SDK version 3
 
 ```Bash
 cd v3 
