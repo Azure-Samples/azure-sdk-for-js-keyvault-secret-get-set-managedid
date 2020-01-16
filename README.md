@@ -78,22 +78,6 @@ Next you will create a Key Vault using the Resource Group created in the previou
 az keyvault create --name "<MyKeyVaultName>" --resource-group "<MyResourceGroupName>" --location eastus
 ```
 
-### Add a Secret to Key Vault
-
-Next, we'll add a secret to Key Vault to help illustrate how Secret Value works. You could store an SQL connection string or any other information that you need to keep secure and make it available to your application. 
-
-In this tutorial, the password will be called **AppSecret** and will store the value of **MySecret** in it:
-
-```Bash
-az keyvault secret set --vault-name "<MyKeyVaultName>" --name AppSecret --value MySecret
-```
-
-To view the value contained in the Secret as plain text, please type the following command. This command shows the Secret Information including the URI. After completing these steps, you should have a URI to a Secret in an Azure Key Vault. Copy the output from the previous command to text editor. You will need it later:
-
-```Bash
-az keyvault secret show --name AppSecret --vault-name "<MyKeyVaultName>"
-```
-
 ### Clone the repo
 
 Run the following command to clone this sample code to your local machine:
@@ -188,7 +172,7 @@ Then, run this command using the name of your Key Vault and the value of Princip
 az keyvault set-policy --name "<MyKeyVaultName>" --object-id "<PrincipalId>" --secret-permissions get
 ```
 
-## Publish the web application to Azure
+## Set up the web application in Azure
 
 To publish this web application to Azure, we need to create an Azure App Service, Azure Web App, and create a Deployment User.
 
@@ -257,7 +241,7 @@ git push azure master
 
 When the git push command has completed you can now navigate to `https://<AppName>.azurewebsites.net` to see the secret value.
 
-Make sure that you replaced the name `<AppName>` with your vault name.
+Make sure that you replaced the name `<AppName>` with your web app name.
 
 ## Next steps
 

@@ -1,36 +1,40 @@
 var http = require('http');
-const {DefaultAzureCredential} = require('@azure/identity');
+const {DefaultAzureCredential, ManagedIdentityCredential} = require('@azure/identity');
 const {SecretClient} = require('@azure/keyvault-secrets');
-// DefaultAzureCredential expects the following three environment variables:
-// - AZURE_TENANT_ID: The tenant ID in Azure Active Directory
-// - AZURE_CLIENT_ID: The application (client) ID registered in the AAD tenant
-// - AZURE_CLIENT_SECRET: The client secret for the registered application
-const credential = new DefaultAzureCredential();
-  
-const vaultName = process.env["KEYVAULT_NAME"] || "<YourVaultName>";
+// // DefaultAzureCredential expects the following three environment variables:
+// // - AZURE_TENANT_ID: The tenant ID in Azure Active Directory
+// // - AZURE_CLIENT_ID: The application (client) ID registered in the AAD tenant
+// // - AZURE_CLIENT_SECRET: The client secret for the registered application
+// const credential = new DefaultAzureCredential();
+
+// ManagedIdentityCredential created by "identity assign" command
+const credential = new ManagedIdentityCredential();
+
+// Replace value with your Key Vault name here
+const vaultName = process.env["KEYVAULT_NAME"] || "<MyKeyVaultName>";
 const url = `https://${vaultName}.vault.azure.net`;
   
 const client = new SecretClient(url, credential);
 
-const secretName = "MySecretName";
+// Replace value with your secret name here
+const secretName = "<MySecretName>";
 
 var server = http.createServer(function(request, response) {
     response.writeHead(200, {"Content-Type": "text/plain"});
-});
-
-async function main(){
-    // Create a secret
-    const result = await client.setSecret(secretName, "MySecretValue");
-    console.log("Secret name: ", result.name);
-    // Read the secret we created
-    const secret = await client.getSecret(secretName);
-    console.log("Successfully retrieved 'MySecretName':", secret.value);
-}
-
-main().catch((err) => {
-    console.log("error code: ", err.code);
-    console.log("error message: ", err.message);
-    console.log("error stack: ", err.stack);
+    async function main(){
+        // Set a secret
+        await client.setSecret(secretName, "<MySecretValue>");
+        // Get the secret we created
+        const secret = await client.getSecret(secretName);
+        response.write(`Your secret value is: ${secret.value}`);
+        response.end();
+    }
+    main().catch((err) => {
+        response.write(`error code: ${err.code}`);
+        response.write(`error message: ${err.message}`);
+        response.write(`error stack: ${err.stack}`);
+        response.end();
+    });
 });
 
 var port = process.env.PORT || 1337;
