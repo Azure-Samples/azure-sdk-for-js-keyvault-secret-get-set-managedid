@@ -187,7 +187,7 @@ Copy the output to text editor for later use. It should be in the following form
 Then, run this command using the name of your Key Vault and the value of PrincipalId copied from above:
 
 ```Bash
-az keyvault set-policy --name "<MyKeyVaultName>" --object-id "<PrincipalId>" --secret-permissions get set
+az keyvault set-policy --name "<MyKeyVaultName>" --object-id "<PrincipalId>" --secret-permissions get
 ```
 
 ## Publish the web application to Azure
