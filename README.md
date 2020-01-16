@@ -12,14 +12,14 @@ urlFragment: get-set-keyvault-secrets-managed-id-nodejs
 
 # How to set and get secrets from Azure Key Vault using Node.js 
 
-This sample shows how to store a secret in Key Vault and how to retrieve it using a Web app. This web app may be run locally or in Azure. The sample uses Node.js and [Azure Managed Identities]
+This sample shows how to store a secret in Key Vault and how to retrieve it using a Web App. This web App may be run locally or in Azure. The sample uses Node.js and [Azure Managed Identities]
 
 > * Create a Key Vault.
 > * Store a secret in Key Vault.
 > * Retrieve a secret from Key Vault.
 > * Create an Azure Web Application.
 > * [Enable Azure Managed Identities].
-> * Grant the required permissions for the web application to read data from Key vault.
+> * Grant the required permissions for the Web Application to read data from Key vault.
 
 Before you proceed make sure that you are familiar with the [Key Vault Concepts].
 
@@ -152,7 +152,7 @@ npm install
 
 Azure Key Vault provides a way to securely store credentials and other keys and secrets, but your code needs to be authenticated to Key Vault before retrieving them. Azure Managed Identities simplify this need by giving Azure services an automatically managed identity in Azure Active Directory (Azure AD). You can use this identity to authenticate to any service that supports Azure AD authentication, including Key Vault, without having to store any credentials in your code.
 
-Run the "identity assign" command to create an identity for this application, this command is the equivalent of going to the portal and switching **Azure Managed Identities** to **On** in the web application properties:
+Run the "identity assign" command to create an identity for this application, this command is the equivalent of going to the portal and switching **Azure Managed Identities** to **On** in the Web Application properties:
 
 ```Bash
 az webapp identity assign --name "<AppName>" --resource-group "<MyResourceGroupName>"
@@ -174,13 +174,13 @@ Then, run this command using the name of your Key Vault and the value of Princip
 az keyvault set-policy --name "<MyKeyVaultName>" --object-id "<PrincipalId>" --secret-permissions get set
 ```
 
-## Publish the web application to Azure
+## Publish the Web Application to Azure
 
-To publish this web application to Azure, we need to create an Azure App Service, Azure Web App, and create a Deployment User.
+To publish this Web Application to Azure, we need to create an Azure App Service, Azure Web App, and create a Deployment User.
 
 **1. Azure App Service**
 
-The first step is to create an [Azure App Service] Plan. You can store multiple web apps in this plan. Use the Resource Group that you created earlier in the following command:
+The first step is to create an [Azure App Service] Plan. You can store multiple Web Apps in this plan. Use the Resource Group that you created earlier in the following command:
 
 ```Bash
 az appservice plan create --name "<MyAppServicePlan>" --resource-group "<MyResourceGroup>"
@@ -188,11 +188,11 @@ az appservice plan create --name "<MyAppServicePlan>" --resource-group "<MyResou
 
 **2. Azure Web App**
 
-Next we create a web app. In the following example, replace <AppName> with a globally unique app name (valid characters are a-z, 0-9, and -). The runtime is set to NODE|6.9. To see all supported runtimes, run az webapp list-runtimes:
+Next we create a Web App. In the following example, replace <AppName> with a globally unique app name (valid characters are a-z, 0-9, and -). The runtime is set to NODE|6.9. To see all supported runtimes, run az webapp list-runtimes:
  
     az webapp create --resource-group "<MyResourceGroup>" --plan "<MyAppServicePlan>" --name "<AppName>" --runtime "NODE|6.9" --deployment-local-git
 
-After the web app is created, the Azure CLI outputs something similar to the following:
+After the Web App is created, the Azure CLI outputs something similar to the following:
 
     
     {
@@ -208,7 +208,7 @@ After the web app is created, the Azure CLI outputs something similar to the fol
       < JSON data removed for brevity. >
     }
     
-Browse to your newly created web app, and you should see a functioning web app. Replace `<AppName>` with the unique app name that you chose previously.
+Browse to your newly created Web App, and you should see a functioning Web App. Replace `<AppName>` with the unique app name that you chose previously.
 
 ```Bash    
 http://<AppName>.azurewebsites.net
@@ -239,7 +239,7 @@ git push azure master
 
 When the git push command has completed you can now navigate to `https://<AppName>.azurewebsites.net` to see the secret value.
 
-Make sure that you replaced the name `<AppName>` with your web app name.
+Make sure that you replaced the name `<AppName>` with your Web App name.
 
 ## Next steps
 
