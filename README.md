@@ -78,6 +78,22 @@ Next you will create a Key Vault using the Resource Group created in the previou
 az keyvault create --name "<MyKeyVaultName>" --resource-group "<MyResourceGroupName>" --location eastus
 ```
 
+### Add a Secret to Key Vault
+
+Next, we'll add a secret to Key Vault to help illustrate how Secret Value works. You could store an SQL connection string or any other information that you need to keep secure and make it available to your application. 
+
+In this tutorial, replace `"<MySecretName>"` and `"<MySecretValue>"` with your custom secret name and secret value:
+
+```Bash
+az keyvault secret set --vault-name "<MyKeyVaultName>" --name "<MySecretName>" --value "<MySecretValue>"
+```
+
+To view the value contained in the Secret as plain text, please type the following command. This command shows the Secret Information including the URI. After completing these steps, you should have a URI to a Secret in an Azure Key Vault. Copy the output from the previous command to text editor. You will need it later:
+
+```Bash
+az keyvault secret show --name "<MySecretName>" --vault-name "<MyKeyVaultName>"
+```
+
 ### Clone the repo
 
 Run the following command to clone this sample code to your local machine:

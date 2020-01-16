@@ -11,7 +11,7 @@ const {SecretClient} = require('@azure/keyvault-secrets');
 const credential = new ManagedIdentityCredential();
 
 // Replace value with your Key Vault name here
-const vaultName = process.env["KEYVAULT_NAME"] || "<MyKeyVaultName>";
+const vaultName = "<MyKeyVaultName>";
 const url = `https://${vaultName}.vault.azure.net`;
   
 const client = new SecretClient(url, credential);
@@ -22,8 +22,6 @@ const secretName = "<MySecretName>";
 var server = http.createServer(function(request, response) {
     response.writeHead(200, {"Content-Type": "text/plain"});
     async function main(){
-        // Set a secret
-        await client.setSecret(secretName, "<MySecretValue>");
         // Get the secret we created
         const secret = await client.getSecret(secretName);
         response.write(`Your secret value is: ${secret.value}`);
