@@ -146,6 +146,8 @@ npm install
   az keyvault show --name "<MyKeyVaultName>"
   ```
 
+- To use the above returned credentials information in your Web App, set **AZURE_CLIENT_ID**(appId), **AZURE_CLIENT_SECRET**(password) and **AZURE_TENANT_ID**(tenant) environment variables in the **Settings** > **Configuration** > **Application Settings** of your Web App.
+
 ### Enable Azure Managed Identities
 
 Azure Key Vault provides a way to securely store credentials and other keys and secrets, but your code needs to be authenticated to Key Vault before retrieving them. Azure Managed Identities simplify this need by giving Azure services an automatically managed identity in Azure Active Directory (Azure AD). You can use this identity to authenticate to any service that supports Azure AD authentication, including Key Vault, without having to store any credentials in your code.
@@ -169,10 +171,10 @@ Copy the output to text editor for later use. It should be in the following form
 Then, run this command using the name of your Key Vault and the value of PrincipalId copied from above:
 
 ```Bash
-az keyvault set-policy --name "<MyKeyVaultName>" --object-id "<PrincipalId>" --secret-permissions get
+az keyvault set-policy --name "<MyKeyVaultName>" --object-id "<PrincipalId>" --secret-permissions get set
 ```
 
-## Set up the web application in Azure
+## Publish the web application to Azure
 
 To publish this web application to Azure, we need to create an Azure App Service, Azure Web App, and create a Deployment User.
 
@@ -188,12 +190,8 @@ az appservice plan create --name "<MyAppServicePlan>" --resource-group "<MyResou
 
 Next we create a web app. In the following example, replace <AppName> with a globally unique app name (valid characters are a-z, 0-9, and -). The runtime is set to NODE|6.9. To see all supported runtimes, run az webapp list-runtimes:
  
-    
-    # Bash
     az webapp create --resource-group "<MyResourceGroup>" --plan "<MyAppServicePlan>" --name "<AppName>" --runtime "NODE|6.9" --deployment-local-git
-    # PowerShell
-    az webapp create --resource-group "<MyResourceGroup>" --plan "<MyAppServicePlan>" --name "<AppName>" --runtime "NODE|6.9"
-    
+
 After the web app is created, the Azure CLI outputs something similar to the following:
 
     
