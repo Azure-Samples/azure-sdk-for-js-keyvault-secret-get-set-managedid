@@ -82,16 +82,16 @@ az keyvault create --name "<MyKeyVaultName>" --resource-group "<MyResourceGroupN
 
 Next, we'll add a secret to Key Vault to help illustrate how Secret Value works. You could store an SQL connection string or any other information that you need to keep secure and make it available to your application. 
 
-In this tutorial, the password will be called **AppSecret** and will store the value of **MySecret** in it:
+In this tutorial, replace `"<MySecretName>"` and `"<MySecretValue>"` with your custom secret name and secret value:
 
 ```Bash
-az keyvault secret set --vault-name "<MyKeyVaultName>" --name AppSecret --value MySecret
+az keyvault secret set --vault-name "<MyKeyVaultName>" --name "<MySecretName>" --value "<MySecretValue>"
 ```
 
 To view the value contained in the Secret as plain text, please type the following command. This command shows the Secret Information including the URI. After completing these steps, you should have a URI to a Secret in an Azure Key Vault. Copy the output from the previous command to text editor. You will need it later:
 
 ```Bash
-az keyvault secret show --name AppSecret --vault-name "<MyKeyVaultName>"
+az keyvault secret show --name "<MySecretName>" --vault-name "<MyKeyVaultName>"
 ```
 
 ### Clone the repo
@@ -162,6 +162,8 @@ npm install
   az keyvault show --name "<MyKeyVaultName>"
   ```
 
+- To use the above returned credentials information in your Web App, set **AZURE_CLIENT_ID**(appId), **AZURE_CLIENT_SECRET**(password) and **AZURE_TENANT_ID**(tenant) environment variables in the **Settings** > **Configuration** > **Application Settings** of your Web App.
+
 ### Enable Azure Managed Identities
 
 Azure Key Vault provides a way to securely store credentials and other keys and secrets, but your code needs to be authenticated to Key Vault before retrieving them. Azure Managed Identities simplify this need by giving Azure services an automatically managed identity in Azure Active Directory (Azure AD). You can use this identity to authenticate to any service that supports Azure AD authentication, including Key Vault, without having to store any credentials in your code.
@@ -204,13 +206,9 @@ az appservice plan create --name "<MyAppServicePlan>" --resource-group "<MyResou
 
 Next we create a web app. In the following example, replace <AppName> with a globally unique app name (valid characters are a-z, 0-9, and -). The runtime is set to NODE|6.9. To see all supported runtimes, run az webapp list-runtimes:
  
-    
-    # Bash
     az webapp create --resource-group "<MyResourceGroup>" --plan "<MyAppServicePlan>" --name "<AppName>" --runtime "NODE|6.9" --deployment-local-git
-    # PowerShell
-    az webapp create --resource-group "<MyResourceGroup>" --plan "<MyAppServicePlan>" --name "<AppName>" --runtime "NODE|6.9"
-    
-After the web app is created, the Azure CLI outputs something similar to the following:
+
+After the Web App is created, the Azure CLI outputs something similar to the following:
 
     
     {
@@ -257,7 +255,7 @@ git push azure master
 
 When the git push command has completed you can now navigate to `https://<AppName>.azurewebsites.net` to see the secret value.
 
-Make sure that you replaced the name `<AppName>` with your vault name.
+Make sure that you replaced the name `<AppName>` with your Web App name.
 
 ## Next steps
 
